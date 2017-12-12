@@ -31,11 +31,11 @@ public class Task07 {
         int parentCount = driver.findElements(By.id("app-")).size();
         for (int i = 0; i < parentCount; i++) {
             driver.findElements(By.id("app-")).get(i).click();
-            Assert.assertTrue(driver.findElement(By.tagName("h1")).isEnabled());
+            Assert.assertTrue(driver.findElement(By.tagName("h1")).isEnabled(), "Заголовок не найден");
             int childCount = driver.findElements(By.id("app-")).get(i).findElements(By.tagName("li")).size();
             for (int j = 1; j < childCount; j++) {
                 driver.findElements(By.id("app-")).get(i).findElements(By.tagName("li")).get(j).click();
-                Assert.assertTrue(driver.findElement(By.tagName("h1")).isEnabled());
+                Assert.assertTrue(driver.findElement(By.tagName("h1")).isEnabled(),"Заголовок не найден");
             }
         }
     }
