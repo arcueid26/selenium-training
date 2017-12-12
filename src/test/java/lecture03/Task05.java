@@ -1,33 +1,31 @@
 package lecture03;
 
-import org.openqa.selenium.By;
+import libs.Login;
+import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import util.WebDriverManager;
+import libs.WebDriverManager;
 
 public class Task05 {
 
-    private String username = "admin";
-    private String password = "admin";
     private String browser = "Firefox ESR";
+    private WebDriver driver;
     private WebDriverManager manager = new WebDriverManager();
+    private Login login = new Login();
 
     @BeforeTest
     public void start() {
-        manager.startDriver(browser);
+        driver = manager.startDriver(browser);
     }
 
-    @Test()
+    @Test
     public void loginToAdminArea() {
-        manager.getDriver().get("http://localhost/litecart/admin/login.php");
-        manager.getDriver().findElement(By.name("username")).sendKeys(username);
-        manager.getDriver().findElement(By.name("password")).sendKeys(password);
-        manager.getDriver().findElement(By.name("login")).click();
+        login.loginToAdminArea(driver);
     }
 
     @AfterTest
     public void stop() {
-        manager.stopDriver();
+        manager.stopDriver(driver);
     }
 }

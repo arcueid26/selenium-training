@@ -1,37 +1,31 @@
 package lecture02;
 
-import org.openqa.selenium.By;
+import libs.Login;
+import libs.WebDriverManager;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class Task03 {
 
-    private String username = "admin";
-    private String password = "admin";
+    private String browser = "Chrome";
     private WebDriver driver;
-    private WebDriverWait wait;
+    private WebDriverManager manager = new WebDriverManager();
+    private Login login = new Login();
 
     @BeforeTest
     public void start() {
-        driver = new ChromeDriver();
-        wait = new WebDriverWait(driver, 10);
+        driver = manager.startDriver(browser);
     }
 
     @Test
     public void loginToAdminArea() {
-        driver.get("http://localhost/litecart/admin/login.php");
-        driver.findElement(By.name("username")).sendKeys(username);
-        driver.findElement(By.name("password")).sendKeys(password);
-        driver.findElement(By.name("login")).click();
+        login.loginToAdminArea(driver);
     }
 
     @AfterTest
     public void stop() {
-        driver.quit();
-        driver = null;
+        manager.stopDriver(driver);
     }
 }

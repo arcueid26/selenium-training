@@ -1,4 +1,4 @@
-package util;
+package libs;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -16,11 +16,7 @@ public class WebDriverManager {
     private WebDriverWait wait;
     private FirefoxOptions options;
 
-    public WebDriver getDriver() {
-        return driver;
-    }
-
-    public void startDriver(String browser) {
+    public WebDriver startDriver(String browser) {
         switch (browser) {
             case "Chrome":
                 driver = new ChromeDriver();
@@ -47,10 +43,12 @@ public class WebDriverManager {
                 break;
         }
         wait = new WebDriverWait(driver, 10);
+        return driver;
     }
 
-    public void stopDriver() {
-        driver.quit();
-        driver = null;
+    public void stopDriver(WebDriver driver) {
+        if (driver != null) {
+            driver.quit();
+        }
     }
 }
