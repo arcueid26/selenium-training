@@ -22,12 +22,8 @@ public class Task07 {
     }
 
     @Test
-    public void loginToAdminArea() {
-        login.loginToAdminArea(driver);
-    }
-
-    @Test
     public void navigateOnMenu() {
+        login.loginToAdminArea(driver);
         int parentCount = driver.findElements(By.id("app-")).size();
         for (int i = 0; i < parentCount; i++) {
             driver.findElements(By.id("app-")).get(i).click();

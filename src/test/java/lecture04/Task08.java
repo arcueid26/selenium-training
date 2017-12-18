@@ -27,7 +27,7 @@ public class Task08 {
         driver.get("http:///localhost/litecart/en/");
         List<WebElement> ducks = driver.findElements(By.cssSelector(".product"));
         for (WebElement duck : ducks) {
-            Assert.assertTrue(duck.findElement(By.cssSelector(".sticker")).isEnabled(), "Cтикер не найден");
+            Assert.assertTrue(duck.findElements(By.cssSelector(".sticker")).size() == 1, "Количество стикеров товара не равно 1");
         }
     }
 
